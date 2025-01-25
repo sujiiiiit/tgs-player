@@ -1,8 +1,11 @@
 import os
+from dotenv import load_dotenv
 from telethon import TelegramClient
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetShortName, DocumentAttributeCustomEmoji
 import json
+
+load_dotenv()
 
 # Telegram credentials
 api_id = os.getenv('API_ID')
@@ -39,7 +42,7 @@ async def main():
     # print(sticker_set_json)
 
     # Write the sticker set metadata to a JSON file
-    output_dir = f'../public/tgs/{emoji_pack_short_name}'
+    output_dir = f'../../public/tgs/{emoji_pack_short_name}'
     os.makedirs(output_dir, exist_ok=True)
     def convert_ids_to_strings(obj):
             if isinstance(obj, dict):
