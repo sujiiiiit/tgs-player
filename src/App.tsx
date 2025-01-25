@@ -62,7 +62,7 @@ const App: React.FC = () => {
   };
 
   const [data, setData] = useState<StickerSet | null>(null);
-  const limit = 10; // Set the limit for the number of documents to display
+  const limit = 32; // Set the limit for the number of documents to display
 
   useEffect(() => {
     const fetchStickers = async () => {
