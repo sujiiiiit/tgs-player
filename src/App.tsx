@@ -7,7 +7,7 @@ interface StickerPack {
   documents: number[];
 }
 
-const emoji = "MashupEmoji";
+const emoji = "RestrictedEmoji";
 const path = `assets/tgs/${emoji}`
 
 interface StickerSet {
@@ -62,6 +62,7 @@ const App: React.FC = () => {
   };
 
   const [data, setData] = useState<StickerSet | null>(null);
+  const limit = 10; // Set the limit for the number of documents to display
 
   useEffect(() => {
     const fetchStickers = async () => {
@@ -69,7 +70,7 @@ const App: React.FC = () => {
         const response = await fetch(`/${path}/sticker_set.json`);
         const data: StickerSet = await response.json();
         setData(data);
-        console.log(data.documents);
+        // console.log(data.documents);
       } catch (error) {
         console.error("Error fetching sticker set:", error);
       }
@@ -104,7 +105,7 @@ const App: React.FC = () => {
     // <div className="category-items px-2 grid grid-cols-[repeat(auto-fill,2.625rem)] justify-between relative text-[2.125rem] leading-[2.125rem] gap-1 p-4 max-w-[26rem] h-[12rem] items-center overflow-y-auto">
     <div className="category-items px-2 grid grid-cols-[repeat(auto-fill,2.625rem)] justify-between relative text-[2.125rem] leading-[2.125rem] gap-1 p-4  items-center ">
       {data &&
-        data.documents.map((document, i) => {
+        data.documents.slice(0, limit).map((document, i) => {
           const thumbBytes =
             document.thumbs.length > 0 && document.thumbs[0].bytes
               ? new Uint8Array(
